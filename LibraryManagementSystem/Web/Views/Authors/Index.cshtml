@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Author>
+@{
+    ViewData["Title"] = "Authors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Authors</h1>
+<a asp-action="Create" class="btn btn-success mb-3">Add New Author</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Books Count</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var author in Model)
+            {
+                <tr>
+                    <td>@author.FullName</td>
+                    <td>@(author.Books?.Count ?? 0)</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@author.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Edit" asp-route-id="@author.Id" class="btn btn-secondary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@author.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">No authors found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

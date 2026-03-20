@@ -1,0 +1,36 @@
+﻿@model Author
+@{
+    ViewData["Title"] = "Author Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Author Details</h1>
+
+@if (Model != null)
+{
+    <div>
+        <h4>Full Name: @Model.FullName</h4>
+        <h5>Books:</h5>
+        <ul>
+            @if (Model.Books != null && Model.Books.Any())
+            {
+                foreach (var book in Model.Books)
+                {
+                    <li>@book.Title</li>
+                }
+            }
+            else
+            {
+                <li>No books listed for this author.</li>
+            }
+        </ul>
+    </div>
+    <hr />
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+    <a asp-action="Index" class="btn btn-primary">Back</a>
+}
+else
+{
+    <div class="alert alert-warning">Author not found.</div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+}

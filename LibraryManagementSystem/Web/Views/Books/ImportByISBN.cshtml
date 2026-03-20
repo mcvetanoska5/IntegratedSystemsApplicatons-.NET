@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Import Book";
+}
+<h2>Import Book by ISBN</h2>
+
+<form asp-action="ImportByISBN" method="post">
+    <input name="isbn" class="form-control" placeholder="Enter ISBN" />
+    <br />
+    <button type="submit" class="btn btn-primary">Import</button>
+</form>

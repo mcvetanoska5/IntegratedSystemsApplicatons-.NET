@@ -1,0 +1,26 @@
+﻿@model Rental
+<h1>Rent a Book</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group mb-3">
+        <label>Select Book</label>
+        <select name="bookId" class="form-control" asp-items="ViewBag.BookList">
+            <option value="">-- Choose a Book --</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Select Member</label>
+        <select name="memberId" class="form-control" asp-items="ViewBag.MemberList">
+            <option value="">-- Choose a Member --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Rent Now</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+}

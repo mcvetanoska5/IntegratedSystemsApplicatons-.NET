@@ -1,0 +1,39 @@
+﻿@model List<Rental>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Books</th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@(rental.Member?.FullName ?? "Member: " + rental.MemberId)</td>
+                <td>
+                    @if (rental.Books != null && rental.Books.Any())
+                    {
+                        @foreach (var br in rental.Books)
+                        {
+                            <div>@(br.Book?.Title ?? "Book ID: " + br.BookId)</div>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted">No books</span>
+                    }
+                </td>
+                <td>@rental.CreatedAt.ToString("dd/MM/yyyy")</td>
+                <td>@rental.CreatedAt.AddDays(14).ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@rental.Id" class="btn btn-sm btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
